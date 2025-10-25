@@ -3,11 +3,11 @@ package racingcar.entity;
 public class Car {
 
     private String name;
-    private int winCount;
+    private int moveCount;
 
-    public Car(String name, int winCount) {
+    public Car(String name, int moveCount) {
         this.name = name;
-        this.winCount = winCount;
+        this.moveCount = moveCount;
     }
 
 }
