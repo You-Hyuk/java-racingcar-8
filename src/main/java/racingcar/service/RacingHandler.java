@@ -3,6 +3,7 @@ package racingcar.service;
 import camp.nextstep.edu.missionutils.Randoms;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 import racingcar.entity.Car;
 import racingcar.view.OutputView;
 
@@ -39,5 +40,16 @@ public class RacingHandler {
         if (Randoms.pickNumberInRange(MIN_BOUND, MAX_BOUND) >= MIN_PASS_VALUE) {
             car.increaseMoveCount();
         }
+    }
+
+    private List<Car> validateRaceWinners(List<Car> cars) {
+        int maxMoveCount = cars.stream()
+                .mapToInt(Car::getMoveCount)
+                .max()
+                .orElse(0);
+
+        return cars.stream()
+                .filter(car -> car.getMoveCount() == maxMoveCount)
+                .collect(Collectors.toList());
     }
 }
