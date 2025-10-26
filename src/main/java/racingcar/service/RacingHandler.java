@@ -4,6 +4,7 @@ import camp.nextstep.edu.missionutils.Randoms;
 import java.util.ArrayList;
 import java.util.List;
 import racingcar.entity.Car;
+import racingcar.view.OutputView;
 
 public class RacingHandler {
 
@@ -11,6 +12,8 @@ public class RacingHandler {
     private final int MAX_BOUND = 9;
     private final int MIN_PASS_VALUE = 4;
     private final int DEFAULT_MOVE_COUNT = 0;
+
+    private final OutputView outputView = new OutputView();
 
     public void executeRace(List<String> nameList, int count) {
         List<Car> cars = new ArrayList<>();
@@ -21,12 +24,14 @@ public class RacingHandler {
 
         for (int round = 0; round < count; round++) {
             race(cars);
+            System.out.println();
         }
     }
 
     private void race(List<Car> cars) {
         for (Car car : cars) {
             moveCar(car);
+            outputView.printMoveResult(car);
         }
     }
 
