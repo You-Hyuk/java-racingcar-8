@@ -61,7 +61,7 @@ public class RacingHandler {
 
     private String saveRaceLog(List<Car> cars) {
         return cars.stream()
-                .map(car -> car.getName() + NAME_SEPARATOR + MOVE_SYMBOL.repeat(car.getMoveCount()))
+                .map(car -> car.reportCurrentPosition(NAME_SEPARATOR, MOVE_SYMBOL))
                 .collect(Collectors.joining("\n"));
     }
 }

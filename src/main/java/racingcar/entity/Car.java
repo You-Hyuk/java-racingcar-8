@@ -22,4 +22,8 @@ public class Car {
         this.moveCount++;
     }
 
+    public String reportCurrentPosition(String nameSeparator, String moveSymbol) {
+        return this.name + nameSeparator + moveSymbol.repeat(this.moveCount);
+    }
+
 }
