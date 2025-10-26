@@ -10,4 +10,8 @@ public class Car {
         this.moveCount = moveCount;
     }
 
+    public void increaseMoveCount() {
+        this.moveCount++;
+    }
+
 }
