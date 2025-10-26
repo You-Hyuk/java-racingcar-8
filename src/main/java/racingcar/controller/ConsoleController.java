@@ -1,6 +1,7 @@
 package racingcar.controller;
 
 import java.util.List;
+import racingcar.entity.RaceResult;
 import racingcar.service.NameParser;
 import racingcar.service.RacingHandler;
 import racingcar.view.InputView;
@@ -18,7 +19,9 @@ public class ConsoleController {
         int count = inputView.printCountPrompt();
         List<String> nameList = nameParser.parseName(names);
         outputView.printRaceExecutePrompt();
-        racingHandler.executeRace(nameList, count);
+        RaceResult raceResult = racingHandler.executeRace(nameList, count);
+        outputView.printRaceLogs(raceResult.getRaceLogs());
+        outputView.printRaceWinners(raceResult.getWinners());
     }
 
 }

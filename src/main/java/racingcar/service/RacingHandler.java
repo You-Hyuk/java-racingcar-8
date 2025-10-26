@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 import racingcar.entity.Car;
+import racingcar.entity.RaceResult;
 import racingcar.view.OutputView;
 
 public class RacingHandler {
@@ -13,36 +14,24 @@ public class RacingHandler {
     private static final int MAX_BOUND = 9;
     private static final int MIN_PASS_VALUE = 4;
     private static final int DEFAULT_MOVE_COUNT = 0;
+    private static final String NAME_SEPARATOR = " : ";
+    private static final String MOVE_SYMBOL = "-";
 
     private final OutputView outputView = new OutputView();
 
-    public void executeRace(List<String> nameList, int count) {
+    public RaceResult executeRace(List<String> nameList, int count) {
         List<Car> cars = new ArrayList<>();
+        List<String> raceLogs = new ArrayList<>();
         for (String name : nameList) {
             Car car = new Car(name, DEFAULT_MOVE_COUNT);
             cars.add(car);
         }
 
         for (int round = 0; round < count; round++) {
-            race(cars);
-            System.out.println();
+            raceLogs.add(race(cars));
         }
 
-        List<Car> winners = findRaceWinners(cars);
-        outputView.printRaceWinners(winners);
-    }
-
-    private void race(List<Car> cars) {
-        for (Car car : cars) {
-            moveCar(car);
-            outputView.printMoveResult(car);
-        }
-    }
-
-    private void moveCar(Car car) {
-        if (Randoms.pickNumberInRange(MIN_BOUND, MAX_BOUND) >= MIN_PASS_VALUE) {
-            car.increaseMoveCount();
-        }
+        return new RaceResult(raceLogs, findRaceWinners(cars));
     }
 
     private List<Car> findRaceWinners(List<Car> cars) {
@@ -54,5 +43,25 @@ public class RacingHandler {
         return cars.stream()
                 .filter(car -> car.getMoveCount() == maxMoveCount)
                 .collect(Collectors.toList());
+    }
+
+    private String race(List<Car> cars) {
+        for (Car car : cars) {
+            moveCar(car);
+        }
+
+        return saveRaceLog(cars);
+    }
+
+    private void moveCar(Car car) {
+        if (Randoms.pickNumberInRange(MIN_BOUND, MAX_BOUND) >= MIN_PASS_VALUE) {
+            car.increaseMoveCount();
+        }
+    }
+
+    private String saveRaceLog(List<Car> cars) {
+        return cars.stream()
+                .map(car -> car.getName() + NAME_SEPARATOR + MOVE_SYMBOL.repeat(car.getMoveCount()))
+                .collect(Collectors.joining("\n"));
     }
 }
