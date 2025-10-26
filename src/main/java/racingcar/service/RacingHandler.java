@@ -28,7 +28,7 @@ public class RacingHandler {
             System.out.println();
         }
 
-        List<Car> winners = validateRaceWinners(cars);
+        List<Car> winners = findRaceWinners(cars);
         outputView.printRaceWinners(winners);
     }
 
@@ -45,7 +45,7 @@ public class RacingHandler {
         }
     }
 
-    private List<Car> validateRaceWinners(List<Car> cars) {
+    private List<Car> findRaceWinners(List<Car> cars) {
         int maxMoveCount = cars.stream()
                 .mapToInt(Car::getMoveCount)
                 .max()
