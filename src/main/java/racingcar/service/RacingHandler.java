@@ -9,10 +9,10 @@ import racingcar.view.OutputView;
 
 public class RacingHandler {
 
-    private final int MIN_BOUND = 0;
-    private final int MAX_BOUND = 9;
-    private final int MIN_PASS_VALUE = 4;
-    private final int DEFAULT_MOVE_COUNT = 0;
+    private static final int MIN_BOUND = 0;
+    private static final int MAX_BOUND = 9;
+    private static final int MIN_PASS_VALUE = 4;
+    private static final int DEFAULT_MOVE_COUNT = 0;
 
     private final OutputView outputView = new OutputView();
 
