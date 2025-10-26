@@ -27,6 +27,9 @@ public class RacingHandler {
             race(cars);
             System.out.println();
         }
+
+        List<Car> winners = validateRaceWinners(cars);
+        outputView.printRaceWinners(winners);
     }
 
     private void race(List<Car> cars) {
