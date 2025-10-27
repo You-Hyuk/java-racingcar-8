@@ -55,8 +55,20 @@ public class InputHandlerTest {
         String count = "NOT NUMBER";
 
         //when && then
-        Assertions.assertThatThrownBy(() -> inputHandler.validateNumberFormat(count))
+        Assertions.assertThatThrownBy(() -> inputHandler.validateCount(count))
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessage(ErrorMessage.INVALID_NUMBER_INPUT.getDescription());
+    }
+
+    @Test
+    @DisplayName("시도 횟수 입력이 양수가 아닌 경우 예외가 발생한다.")
+    public void failIfCountNotPositive() throws Exception {
+        //given
+        String count = "-1";
+
+        //when && then
+        Assertions.assertThatThrownBy(() -> inputHandler.validateCount(count))
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessage(ErrorMessage.COUNT_OUT_OF_RANGE.getDescription());
     }
 }
