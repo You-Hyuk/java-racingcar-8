@@ -2,7 +2,7 @@ package racingcar.entity;
 
 public class Car {
 
-    private String name;
+    private final String name;
     private int moveCount;
 
     public Car(String name, int moveCount) {
@@ -18,12 +18,17 @@ public class Car {
         return moveCount;
     }
 
-    public void move() {
-        this.moveCount++;
+    public void move(int randomValue, int minPassValue) {
+        if (randomValue >= minPassValue) {
+            this.moveCount++;
+        }
     }
 
     public String reportCurrentPosition(String nameSeparator, String moveSymbol) {
         return this.name + nameSeparator + moveSymbol.repeat(this.moveCount);
     }
 
+    public boolean isWinner(int maxMoveCount) {
+        return this.moveCount == maxMoveCount;
+    }
 }

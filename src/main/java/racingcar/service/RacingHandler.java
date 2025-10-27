@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 import racingcar.entity.Car;
+import racingcar.entity.Cars;
 import racingcar.entity.RaceResult;
 import racingcar.view.OutputView;
 
@@ -13,55 +14,32 @@ public class RacingHandler {
     private static final int MIN_BOUND = 0;
     private static final int MAX_BOUND = 9;
     private static final int MIN_PASS_VALUE = 4;
-    private static final int DEFAULT_MOVE_COUNT = 0;
     private static final String NAME_SEPARATOR = " : ";
     private static final String MOVE_SYMBOL = "-";
-
-    private final OutputView outputView = new OutputView();
-
+    
     public RaceResult executeRace(List<String> nameList, int count) {
-        List<Car> cars = new ArrayList<>();
         List<String> raceLogs = new ArrayList<>();
-        for (String name : nameList) {
-            Car car = new Car(name, DEFAULT_MOVE_COUNT);
-            cars.add(car);
-        }
+        Cars participants = new Cars(
+                nameList.stream()
+                        .map(name -> new Car(name, 0))
+                        .collect(Collectors.toList())
+        );
 
         for (int round = 0; round < count; round++) {
-            raceLogs.add(race(cars));
+            List<Integer> randomValues = generateRandomValue(participants.size());
+            participants.race(randomValues, MIN_PASS_VALUE);
+            raceLogs.add(participants.reportCurrentPositions(NAME_SEPARATOR, MOVE_SYMBOL));
         }
 
-        return new RaceResult(raceLogs, findRaceWinners(cars), cars);
+        Cars winners = participants.findWinners();
+        return new RaceResult(raceLogs, winners, participants);
     }
 
-    private List<Car> findRaceWinners(List<Car> cars) {
-        int maxMoveCount = cars.stream()
-                .mapToInt(Car::getMoveCount)
-                .max()
-                .orElse(0);
-
-        return cars.stream()
-                .filter(car -> car.getMoveCount() == maxMoveCount)
-                .collect(Collectors.toList());
-    }
-
-    private String race(List<Car> cars) {
-        for (Car car : cars) {
-            moveCar(car);
+    private List<Integer> generateRandomValue(int size) {
+        List<Integer> randomValues = new ArrayList<>();
+        for (int i = 0; i < size; i++) {
+            randomValues.add(Randoms.pickNumberInRange(MIN_BOUND, MAX_BOUND));
         }
-
-        return saveRaceLog(cars);
-    }
-
-    private void moveCar(Car car) {
-        if (Randoms.pickNumberInRange(MIN_BOUND, MAX_BOUND) >= MIN_PASS_VALUE) {
-            car.move();
-        }
-    }
-
-    private String saveRaceLog(List<Car> cars) {
-        return cars.stream()
-                .map(car -> car.reportCurrentPosition(NAME_SEPARATOR, MOVE_SYMBOL))
-                .collect(Collectors.joining("\n"));
+        return randomValues;
     }
 }
