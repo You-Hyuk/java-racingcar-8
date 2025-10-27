@@ -7,14 +7,14 @@ import racingcar.service.RacingHandler;
 import racingcar.view.InputView;
 import racingcar.view.OutputView;
 
-public class ConsoleController {
+public class RacingController {
 
     private final InputView inputView = new InputView();
     private final OutputView outputView = new OutputView();
     private final InputHandler inputHandler = new InputHandler();
     private final RacingHandler racingHandler = new RacingHandler();
 
-    public void executeConsole() {
+    public void run() {
         List<String> nameList = inputHandler.parseName(inputView.readName());
         int count = inputHandler.validateCount(inputView.readCount());
         outputView.printRaceExecutePrompt();
