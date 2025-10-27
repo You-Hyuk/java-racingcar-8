@@ -47,4 +47,16 @@ public class InputHandlerTest {
         Assertions.assertThat(nameList)
                 .containsExactly("pobi", "jun", "woni");
     }
+
+    @Test
+    @DisplayName("시도 횟수 입력이 숫자가 아닌 경우 예외가 발생한다.")
+    public void failIfCountNotNumeric() throws Exception {
+        //given
+        String count = "NOT NUMBER";
+
+        //when && then
+        Assertions.assertThatThrownBy(() -> inputHandler.validateNumberFormat(count))
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessage(ErrorMessage.INVALID_NUMBER_INPUT.getDescription());
+    }
 }
