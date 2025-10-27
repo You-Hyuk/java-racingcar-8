@@ -17,7 +17,13 @@ public class InputHandler {
         return List.of(splitNames);
     }
 
-    public int validateNumberFormat(String count) {
+    public int validateCount(String input) {
+        int count = parseNumberFormat(input);
+        validateNumberRange(count);
+        return count;
+    }
+
+    private int parseNumberFormat(String count) {
         try {
             return Integer.parseInt(count);
         } catch (NumberFormatException exception) {
@@ -25,7 +31,7 @@ public class InputHandler {
         }
     }
 
-    private int validateNumberRange(int count) {
+    private void validateNumberRange(int count) {
         if (count < 1) {
             throw new IllegalArgumentException(ErrorMessage.COUNT_OUT_OF_RANGE.getDescription());
         }
