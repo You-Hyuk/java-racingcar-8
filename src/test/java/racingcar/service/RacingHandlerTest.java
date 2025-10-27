@@ -5,8 +5,8 @@ import java.util.stream.Collectors;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import racingcar.entity.Car;
-import racingcar.entity.RaceResult;
+import racingcar.domain.Car;
+import racingcar.domain.RaceResult;
 
 public class RacingHandlerTest {
 

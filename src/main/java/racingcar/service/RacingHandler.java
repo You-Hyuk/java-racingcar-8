@@ -4,10 +4,9 @@ import camp.nextstep.edu.missionutils.Randoms;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
-import racingcar.entity.Car;
-import racingcar.entity.Cars;
-import racingcar.entity.RaceResult;
-import racingcar.view.OutputView;
+import racingcar.domain.Car;
+import racingcar.domain.Cars;
+import racingcar.domain.RaceResult;
 
 public class RacingHandler {
 
