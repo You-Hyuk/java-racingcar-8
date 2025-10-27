@@ -15,9 +15,8 @@ public class ConsoleController {
     private final RacingHandler racingHandler = new RacingHandler();
 
     public void executeConsole() {
-        String names = inputView.printNamePrompt();
-        int count = inputHandler.validateNumberFormat(inputView.printCountPrompt());
-        List<String> nameList = inputHandler.parseName(names);
+        List<String> nameList = inputHandler.parseName(inputView.readName());
+        int count = inputHandler.validateNumberFormat(inputView.readCount());
         outputView.printRaceExecutePrompt();
         RaceResult raceResult = racingHandler.executeRace(nameList, count);
         outputView.printRaceLogs(raceResult.getRaceLogs());
