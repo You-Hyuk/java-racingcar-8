@@ -31,7 +31,7 @@ public class RacingHandler {
             raceLogs.add(race(cars));
         }
 
-        return new RaceResult(raceLogs, findRaceWinners(cars));
+        return new RaceResult(raceLogs, findRaceWinners(cars), cars);
     }
 
     private List<Car> findRaceWinners(List<Car> cars) {
