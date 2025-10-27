@@ -1,9 +1,10 @@
 package racingcar.service;
 
+import camp.nextstep.edu.missionutils.Console;
 import java.util.List;
 import racingcar.exception.ErrorMessage;
 
-public class NameParser {
+public class InputHandler {
 
     private static final String NAME_DELIMITER = ",";
 
@@ -14,6 +15,14 @@ public class NameParser {
         }
 
         return List.of(splitNames);
+    }
+
+    public int validateNumberFormat(String count) {
+        try {
+            return Integer.parseInt(Console.readLine());
+        } catch (NumberFormatException exception) {
+            throw new IllegalArgumentException(ErrorMessage.INVALID_NUMBER_INPUT.getDescription());
+        }
     }
 
     private void validateNameLength(String name) {
