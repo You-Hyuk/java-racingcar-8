@@ -45,4 +45,21 @@ public class CarsTest {
         Assertions.assertThat(output)
                 .isEqualTo("pobi,woni");
     }
+
+    @Test
+    @DisplayName("가장 많이 전진한 자동차가 우승한다.")
+    public void winnerIsMostMovedCar() throws Exception {
+        //given
+        Car pobi = new Car("pobi", 3);
+        Car woni = new Car("woni", 5);
+        Car jun = new Car("jun", 1);
+        Cars cars = new Cars(List.of(pobi, woni, jun));
+
+        //when
+        Cars winners = cars.findWinners();
+
+        //then
+        Assertions.assertThat(winners.joinNames(","))
+                .isEqualTo("woni");
+    }
 }
