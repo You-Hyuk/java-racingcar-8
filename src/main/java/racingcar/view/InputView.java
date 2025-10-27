@@ -1,6 +1,7 @@
 package racingcar.view;
 
 import camp.nextstep.edu.missionutils.Console;
+import racingcar.exception.ErrorMessage;
 
 public class InputView {
 
@@ -14,6 +15,10 @@ public class InputView {
 
     public int printCountPrompt() {
         System.out.println(COUNT_PROMPT);
-        return Integer.parseInt(Console.readLine());
+        try {
+            return Integer.parseInt(Console.readLine());
+        } catch (NumberFormatException exception) {
+            throw new IllegalArgumentException(ErrorMessage.INVALID_NUMBER_INPUT.getDescription());
+        }
     }
 }
