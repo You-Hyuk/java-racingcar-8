@@ -27,4 +27,22 @@ public class CarsTest {
         Assertions.assertThat(woni.getMoveCount())
                 .isEqualTo(1);
     }
+
+    @Test
+    @DisplayName("여러 명의 우승자가 존재하는 경우 쉼표(,)를 이용해 구분한다.")
+    public void dsa() throws Exception {
+        //given
+        Car pobi = new Car("pobi", 3);
+        Car woni = new Car("woni", 3);
+        Cars cars = new Cars(List.of(pobi, woni));
+        String delimiter = ",";
+
+        //when
+        Cars winners = cars.findWinners();
+        String output = winners.joinNames(delimiter);
+
+        //then
+        Assertions.assertThat(output)
+                .isEqualTo("pobi,woni");
+    }
 }
