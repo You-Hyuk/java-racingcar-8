@@ -25,6 +25,12 @@ public class InputHandler {
         }
     }
 
+    private int validateNumberRange(int count) {
+        if (count < 1) {
+            throw new IllegalArgumentException(ErrorMessage.COUNT_OUT_OF_RANGE.getDescription());
+        }
+    }
+
     private void validateNameLength(String name) {
         if (name.length() > 5) {
             throw new IllegalArgumentException(ErrorMessage.INVALID_NAME_LENGTH.getDescription());
