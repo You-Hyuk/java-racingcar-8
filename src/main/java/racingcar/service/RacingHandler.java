@@ -55,7 +55,7 @@ public class RacingHandler {
 
     private void moveCar(Car car) {
         if (Randoms.pickNumberInRange(MIN_BOUND, MAX_BOUND) >= MIN_PASS_VALUE) {
-            car.increaseMoveCount();
+            car.move();
         }
     }
 

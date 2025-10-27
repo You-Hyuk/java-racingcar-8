@@ -18,7 +18,7 @@ public class Car {
         return moveCount;
     }
 
-    public void increaseMoveCount() {
+    public void move() {
         this.moveCount++;
     }
 
