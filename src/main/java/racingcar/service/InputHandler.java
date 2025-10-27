@@ -1,6 +1,5 @@
 package racingcar.service;
 
-import camp.nextstep.edu.missionutils.Console;
 import java.util.Arrays;
 import java.util.List;
 import racingcar.exception.ErrorMessage;
@@ -20,7 +19,7 @@ public class InputHandler {
 
     public int validateNumberFormat(String count) {
         try {
-            return Integer.parseInt(Console.readLine());
+            return Integer.parseInt(count);
         } catch (NumberFormatException exception) {
             throw new IllegalArgumentException(ErrorMessage.INVALID_NUMBER_INPUT.getDescription());
         }
