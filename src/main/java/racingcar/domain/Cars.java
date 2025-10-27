@@ -16,7 +16,7 @@ public class Cars {
         return cars.size();
     }
 
-    public Cars getCars() {
+    public Cars copy() {
         return new Cars(
                 cars.stream()
                         .map(car -> new Car(car.getName(), car.getMoveCount()))

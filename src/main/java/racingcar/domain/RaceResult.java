@@ -10,8 +10,8 @@ public class RaceResult {
 
     public RaceResult(List<String> raceLogs, Cars winners, Cars participants) {
         this.raceLogs = raceLogs;
-        this.winners = winners.getCars();
-        this.participants = participants.getCars();
+        this.winners = winners;
+        this.participants = participants;
     }
 
     public List<String> getRaceLogs() {
@@ -19,10 +19,10 @@ public class RaceResult {
     }
 
     public Cars getWinners() {
-        return winners;
+        return winners.copy();
     }
 
     public Cars getParticipants() {
-        return participants;
+        return participants.copy();
     }
 }
